@@ -1,0 +1,20 @@
+{
+  "name": "foodsery",
+  "version": "0.1.0",
+  "description": "",
+  "private": true,
+  "scripts": {},
+  "author": "edwintantawi",
+  "license": "MIT",
+  "keywords": [
+    "foodsery"
+  ],
+  "homepage": "https://github.com/edwintantawi/foodsery#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edwintantawi/foodsery.git"
+  },
+  "bugs": {
+    "url": "https://github.com/edwintantawi/foodsery/issues"
+  }
+}
