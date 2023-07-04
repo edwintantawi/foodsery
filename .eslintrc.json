@@ -1,3 +1,73 @@
 {
-  "extends": "next/core-web-vitals"
+  "root": true,
+  "extends": [
+    "next/core-web-vitals",
+    "prettier",
+    "eslint:recommended",
+    "plugin:tailwindcss/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": ["@typescript-eslint", "simple-import-sort"],
+  "parser": "@typescript-eslint/parser",
+  "settings": {
+    "tailwindcss": {
+      "callees": ["cn"],
+      "config": "tailwind.config.js"
+    }
+  },
+  "rules": {
+    "semi": ["error", "always"],
+    "quotes": ["error", "single"],
+    "indent": ["error", 2, { "MemberExpression": 1 }],
+    "no-tabs": ["error", { "allowIndentationTabs": false }],
+    "jsx-quotes": ["error", "prefer-double"],
+    "linebreak-style": ["error", "unix"],
+    "eqeqeq": ["error", "always"],
+    "prefer-const": [
+      "error",
+      {
+        "destructuring": "all",
+        "ignoreReadBeforeAssign": false
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "args": "all", "argsIgnorePattern": "_" }
+    ],
+    "react/jsx-boolean-value": ["error", "never"],
+    "react/self-closing-comp": ["error", { "component": true, "html": true }],
+    "react/jsx-no-leaked-render": [
+      "error",
+      { "validStrategies": ["ternary", "coerce"] }
+    ],
+    "react/jsx-curly-spacing": ["error", "never", { "allowMultiline": false }],
+    "react/function-component-definition": [
+      "error",
+      { "namedComponents": "function-declaration" }
+    ],
+    "tailwindcss/no-custom-classname": "error",
+    "import/newline-after-import": ["error", { "count": 1 }],
+    "import/first": "error",
+    "import/no-duplicates": "error",
+    "simple-import-sort/exports": "error",
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          // react & next imports
+          ["^react(?!-)(/w+)?", "^react-dom", "^next(?!-)(/w+)?"],
+          // external library & side effect imports
+          ["^@?\\w", "^\\u0000"],
+          // application imports
+          ["^~/"],
+          // relative path 1 level imports
+          ["^./"],
+          // {s}css files
+          ["^.+\\.s?css$"],
+          // other imports
+          ["^"]
+        ]
+      }
+    ]
+  }
 }

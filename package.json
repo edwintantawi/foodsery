@@ -34,9 +34,15 @@
     "@commitlint/config-conventional": "^17.6.6",
     "@types/node": "20.3.3",
     "@types/react": "18.2.14",
+    "@typescript-eslint/eslint-plugin": "^5.61.0",
+    "@typescript-eslint/parser": "^5.61.0",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.8",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-tailwindcss": "^3.13.0",
     "husky": "^8.0.3",
+    "prettier-plugin-tailwindcss": "^0.3.0",
     "typescript": "5.1.6"
   }
 }
