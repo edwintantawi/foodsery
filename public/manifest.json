@@ -1,0 +1,20 @@
+{
+  "name": "Foodsery",
+  "short_name": "Foodsery",
+  "display": "standalone",
+  "start_url": "/",
+  "theme_color": "#0F172A",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

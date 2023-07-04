@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Foodsery',
+  manifest: '/manifest.json',
   icons: {
     apple: '/apple-touch-icon.png',
     icon: [
