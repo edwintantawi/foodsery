@@ -1,5 +1,8 @@
 import { Metadata } from 'next';
 
+import { fontMono, fontSans } from '~/lib/fonts';
+import { cn } from '~/lib/utils';
+
 import '~/app/style.css';
 
 export const metadata: Metadata = {
@@ -22,7 +25,9 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={cn('font-sans', fontSans.variable, fontMono.variable)}>
+        {children}
+      </body>
     </html>
   );
 }
