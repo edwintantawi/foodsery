@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 
+import '~/app/style.css';
+
 export const metadata: Metadata = {
   title: 'Foodsery',
   manifest: '/manifest.json',
