@@ -1,6 +1,4 @@
-'use client';
-
-import React from 'react';
+import * as React from 'react';
 
 type Size = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 type Direction = 'up' | 'down';
