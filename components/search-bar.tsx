@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { Icons } from '~/components/icons';
 import { Button } from '~/components/ui/button';
@@ -17,9 +17,10 @@ const searchPlaceholder = {
 
 export function SearchBar() {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const inputRef = React.useRef<HTMLInputElement>(null);
-  const [query, setQuery] = React.useState('');
+  const [query, setQuery] = React.useState(searchParams.get('q') ?? '');
   const isSmUp = useMediaQuery('sm', 'up');
 
   const isEmptyQuery = query === '';
