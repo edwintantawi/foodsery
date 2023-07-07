@@ -6,14 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Icons } from '~/components/icons';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
-import { useMediaQuery } from '~/hooks/use-media-query';
 import { cn } from '~/lib/utils';
-
-const searchPlaceholder = {
-  mobile: 'Search recipes',
-  desktop:
-    'Explore a collection of over 5,000 diverse recipes waiting to be discovered',
-};
 
 export function SearchBar() {
   const router = useRouter();
@@ -21,7 +14,6 @@ export function SearchBar() {
 
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [query, setQuery] = React.useState(searchParams.get('q') ?? '');
-  const isSmUp = useMediaQuery('sm', 'up');
 
   const isEmptyQuery = query === '';
 
@@ -73,9 +65,7 @@ export function SearchBar() {
           className={cn('truncate px-11', {
             'pr-14': isEmptyQuery,
           })}
-          placeholder={
-            isSmUp ? searchPlaceholder.desktop : searchPlaceholder.mobile
-          }
+          placeholder="Explore & discover recipes"
           value={query}
           onChange={handleChangeQuery}
         />
