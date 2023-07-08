@@ -23,8 +23,6 @@ export function RecipeCard({ id, title, image }: RecipeCardProps) {
             fill
             src={image ?? '/cover.png'}
             alt={title}
-            placeholder="blur"
-            blurDataURL="/cover.png"
             className="object-cover transition-transform duration-300 group-hover:scale-110"
           />
         </AspectRatio>
