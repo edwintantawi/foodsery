@@ -1,10 +1,12 @@
-export default function Page() {
+import { DailyRecipes } from '~/containers/daily-recipes';
+
+export default async function Page() {
   return (
-    <div className="px-4 py-6 text-center">
-      <h1>
-        <span className="text-slate-500">Hello</span>,{' '}
-        <span className="font-bold">Foodsery!</span>
-      </h1>
-    </div>
+    <main className="container py-2 lg:py-4">
+      <section>
+        <h2 className="sr-only">Daily Recipes</h2>
+        <DailyRecipes />
+      </section>
+    </main>
   );
 }

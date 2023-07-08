@@ -29,12 +29,12 @@ export function RecipeCard({ id, title, image }: RecipeCardProps) {
           />
         </AspectRatio>
         <header className="absolute bottom-0 z-10 p-3 lg:p-4">
-          <h2
+          <h3
             title={title}
             className="line-clamp-2 text-xs text-white lg:text-sm"
           >
             {title}
-          </h2>
+          </h3>
         </header>
       </article>
     </Link>
