@@ -1,14 +1,23 @@
 import { Metadata } from 'next';
 
 import { AppBar } from '~/components/app-bar';
+import { siteConfig } from '~/configs/site';
 import { fontMono, fontSans } from '~/lib/fonts';
 import { cn } from '~/lib/utils';
 
 import '~/app/style.css';
 
 export const metadata: Metadata = {
-  title: 'Foodsery',
+  title: siteConfig.name,
+  description: siteConfig.description,
   manifest: '/manifest.json',
+  openGraph: {
+    type: 'website',
+    title: siteConfig.name,
+    url: siteConfig.url,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+  },
   icons: {
     apple: '/apple-touch-icon.png',
     icon: [
