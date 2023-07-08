@@ -1,6 +1,6 @@
 import { DailyRecipes } from '~/containers/daily-recipes';
 
-export default async function Page() {
+export default function Page() {
   return (
     <main className="container py-2 lg:py-4">
       <section>
