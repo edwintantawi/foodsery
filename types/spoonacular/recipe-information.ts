@@ -1,7 +1,7 @@
 export type RecipeInformation = {
   id: number;
   title: string;
-  image: string;
+  image?: string;
   imageType: string;
   servings: number;
   readyInMinutes: number;
