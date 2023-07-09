@@ -7,7 +7,7 @@ export async function DailyRecipes() {
 
   return (
     <ScrollArea>
-      <ul className="flex gap-1 p-1 lg:gap-2">
+      <ul className="flex gap-1">
         {recipes.map((recipe) => (
           <li key={recipe.id}>
             <RecipeCard

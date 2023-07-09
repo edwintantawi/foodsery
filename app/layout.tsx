@@ -37,7 +37,13 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body className={cn('font-sans', fontSans.variable, fontMono.variable)}>
+      <body
+        className={cn(
+          'flex min-h-screen flex-col font-sans',
+          fontSans.variable,
+          fontMono.variable
+        )}
+      >
         <AppBar />
         {children}
         <Footer />
