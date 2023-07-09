@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 
 import { AppBar } from '~/components/app-bar';
+import { Footer } from '~/components/footer';
 import { siteConfig } from '~/configs/site';
 import { fontMono, fontSans } from '~/lib/fonts';
 import { cn } from '~/lib/utils';
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body className={cn('font-sans', fontSans.variable, fontMono.variable)}>
         <AppBar />
         {children}
+        <Footer />
       </body>
     </html>
   );

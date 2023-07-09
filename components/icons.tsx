@@ -1,4 +1,13 @@
-import { LucideProps, SearchIcon, XIcon } from 'lucide-react';
+import {
+  CakeSliceIcon,
+  CalendarIcon,
+  GithubIcon,
+  LeafIcon,
+  LightbulbIcon,
+  LucideProps,
+  SearchIcon,
+  XIcon,
+} from 'lucide-react';
 
 export const Icons = {
   Brand: ({
@@ -31,4 +40,9 @@ export const Icons = {
   ),
   Search: SearchIcon,
   Cancel: XIcon,
+  LightBulb: LightbulbIcon,
+  Calendar: CalendarIcon,
+  Leaf: LeafIcon,
+  Dessert: CakeSliceIcon,
+  Github: GithubIcon,
 };
