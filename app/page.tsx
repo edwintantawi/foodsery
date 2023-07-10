@@ -1,5 +1,6 @@
 import { Icons } from '~/components/icons';
 import { DailyRecipes } from '~/containers/daily-recipes';
+import { DessertRecipes } from '~/containers/dessert-recipes';
 import { VegetarianRecipes } from '~/containers/vegetarian-recipes';
 
 export default function Page() {
@@ -47,7 +48,7 @@ export default function Page() {
             </p>
           </div>
         </header>
-        <DailyRecipes />
+        <DessertRecipes />
       </section>
 
       <section className="flex items-center gap-5 rounded-lg border px-5 py-4">
