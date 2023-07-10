@@ -107,7 +107,7 @@ export default async function OpengraphImage({
           name: 'Inter',
           data: await interBoldFont,
           style: 'normal',
-          weight: 800,
+          weight: 700,
         },
       ],
     }
