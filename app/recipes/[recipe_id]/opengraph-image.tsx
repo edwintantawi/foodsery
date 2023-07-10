@@ -15,13 +15,18 @@ export const size = {
 
 export const contentType = 'image/png';
 
-const interBoldFont = fetch(
-  new URL('../../../assets/inter-bold.ttf', import.meta.url)
-).then((res) => res.arrayBuffer());
+async function getInterBoldFont() {
+  const response = await fetch(
+    new URL('../../../assets/inter-bold.ttf', import.meta.url)
+  );
+  return response.arrayBuffer();
+}
 
 export default async function OpengraphImage({
   params,
 }: RecipeDetailPageProps) {
+  const interBoldFont = await getInterBoldFont();
+
   const recipe = await spoonacular.getRecipeInformationById(
     Number(params.recipe_id)
   );
@@ -105,7 +110,7 @@ export default async function OpengraphImage({
       fonts: [
         {
           name: 'Inter',
-          data: await interBoldFont,
+          data: interBoldFont,
           style: 'normal',
           weight: 700,
         },
