@@ -65,6 +65,18 @@ class SpoonacularAPI {
     const data = await response.json();
     return data.recipes;
   }
+
+  // Get random food trivia
+  // https://spoonacular.com/food-api/docs#Random-Food-Trivia
+  async getRandomFoodTrivia(): Promise<string> {
+    const endpoint = this.buildEndpoint('/food/trivia/random');
+    const response = await fetch(endpoint, {
+      // Revalidate every 24 hours
+      next: { revalidate: 60 * 60 * 24 },
+    });
+    const data = await response.json();
+    return data.text;
+  }
 }
 
 export const spoonacular = new SpoonacularAPI(

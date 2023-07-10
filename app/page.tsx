@@ -1,6 +1,7 @@
 import { Icons } from '~/components/icons';
 import { DailyRecipes } from '~/containers/daily-recipes';
 import { DessertRecipes } from '~/containers/dessert-recipes';
+import { FoodTrivia } from '~/containers/food-trivia';
 import { VegetarianRecipes } from '~/containers/vegetarian-recipes';
 
 export default function Page() {
@@ -51,16 +52,7 @@ export default function Page() {
         <DessertRecipes />
       </section>
 
-      <section className="flex items-center gap-5 rounded-lg border px-5 py-4">
-        <Icons.LightBulb className="shrink-0" />
-        <div>
-          <h2 className="mb-0.5 text-base font-bold">Food Trivia</h2>
-          <p className="text-xs text-slate-500">
-            The red food-coloring carmine used in Skittles and other candies is
-            made from boiled cochineal bugs, a type of beetle.
-          </p>
-        </div>
-      </section>
+      <FoodTrivia />
     </main>
   );
 }
