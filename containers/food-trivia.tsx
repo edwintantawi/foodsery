@@ -9,7 +9,7 @@ export async function FoodTrivia() {
       <Icons.LightBulb className="shrink-0" />
       <div>
         <h2 className="mb-0.5 text-base font-bold">Food Trivia</h2>
-        <p className="text-xs text-slate-500">{foodTrivia}</p>
+        <p className="text-xs text-slate-500 sm:text-sm">{foodTrivia}</p>
       </div>
     </section>
   );
