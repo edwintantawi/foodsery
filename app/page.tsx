@@ -1,4 +1,5 @@
 import { Icons } from '~/components/icons';
+import { Section } from '~/components/section';
 import { DailyRecipes } from '~/containers/daily-recipes';
 import { DessertRecipes } from '~/containers/dessert-recipes';
 import { FoodTrivia } from '~/containers/food-trivia';
@@ -7,50 +8,29 @@ import { VegetarianRecipes } from '~/containers/vegetarian-recipes';
 export default function Page() {
   return (
     <main className="container flex-1 space-y-4 pt-1">
-      <section>
-        <header className="sticky top-[65px] z-40 mb-1 flex items-start gap-2 bg-background py-2">
-          <div className="flex aspect-square w-10 shrink-0 items-center justify-center rounded-lg border bg-slate-100 text-primary">
-            <Icons.Calendar className="aspect-square w-5" />
-          </div>
-          <div>
-            <h2 className="font-bold">Daily Recipes</h2>
-            <p className="text-xs text-muted-foreground">
-              Let&lsquo;s try a new interesting recipe today
-            </p>
-          </div>
-        </header>
+      <Section
+        icon={<Icons.Calendar className="aspect-square w-5" />}
+        title="Daily Recipes"
+        subtitle="Let&lsquo;s try a new interesting recipe today"
+      >
         <DailyRecipes />
-      </section>
+      </Section>
 
-      <section>
-        <header className="sticky top-[65px] z-40 mb-1 flex items-start gap-2 bg-background py-2">
-          <div className="flex aspect-square w-10 shrink-0 items-center justify-center rounded-lg border bg-slate-100 text-primary">
-            <Icons.Leaf className="aspect-square w-5" />
-          </div>
-          <div>
-            <h2 className="font-bold">The Vegetarian Ways</h2>
-            <p className="text-xs text-muted-foreground">
-              Vegetarians need not worry, this is for you!
-            </p>
-          </div>
-        </header>
+      <Section
+        icon={<Icons.Leaf className="aspect-square w-5" />}
+        title="The Dessert Land"
+        subtitle="Vegetarians need not worry, this is for you!"
+      >
         <VegetarianRecipes />
-      </section>
+      </Section>
 
-      <section>
-        <header className="sticky top-[65px] z-40 mb-1 flex items-start gap-2 bg-background py-2">
-          <div className="flex aspect-square w-10 shrink-0 items-center justify-center rounded-lg border bg-slate-100 text-primary">
-            <Icons.Dessert className="aspect-square w-5" />
-          </div>
-          <div>
-            <h2 className="font-bold">The Dessert Land</h2>
-            <p className="text-xs text-muted-foreground">
-              Delicious recipe perfect for dessert
-            </p>
-          </div>
-        </header>
+      <Section
+        icon={<Icons.Dessert className="aspect-square w-5" />}
+        title="The Dessert Land"
+        subtitle="Delicious recipe perfect for dessert"
+      >
         <DessertRecipes />
-      </section>
+      </Section>
 
       <FoodTrivia />
     </main>
