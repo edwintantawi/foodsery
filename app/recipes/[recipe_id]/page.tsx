@@ -27,6 +27,10 @@ export async function generateMetadata({
   return {
     title: recipe.title,
     description: sanitizeText(recipe.summary),
+    openGraph: {
+      title: recipe.title,
+      description: sanitizeText(recipe.summary),
+    },
   };
 }
 
