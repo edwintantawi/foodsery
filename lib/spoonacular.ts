@@ -31,6 +31,24 @@ class SpoonacularAPI {
     const data = await response.json();
     return data.recipes;
   }
+
+  // Get n random vegetarian recipes
+  // https://spoonacular.com/food-api/docs#Get-Random-Recipes
+  async getRandomVegetarianRecipes(
+    number: number
+  ): Promise<RecipeInformation[]> {
+    const endpoint = this.buildEndpoint('/recipes/random', {
+      number: number.toString(),
+      limitLicense: 'true',
+      tags: 'vegetarian',
+    });
+    const response = await fetch(endpoint, {
+      // Revalidate every 1 week
+      next: { revalidate: 60 * 60 * 24 * 7 },
+    });
+    const data = await response.json();
+    return data.recipes;
+  }
 }
 
 export const spoonacular = new SpoonacularAPI(

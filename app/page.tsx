@@ -1,5 +1,6 @@
 import { Icons } from '~/components/icons';
 import { DailyRecipes } from '~/containers/daily-recipes';
+import { VegetarianRecipes } from '~/containers/vegetarian-recipes';
 
 export default function Page() {
   return (
@@ -31,7 +32,7 @@ export default function Page() {
             </p>
           </div>
         </header>
-        <DailyRecipes />
+        <VegetarianRecipes />
       </section>
 
       <section>
