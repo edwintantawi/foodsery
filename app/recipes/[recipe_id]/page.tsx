@@ -8,13 +8,16 @@ import { RecipeSummary } from '~/components/recipe-summary';
 import { Section } from '~/components/section';
 import { AspectRatio } from '~/components/ui/aspect-ratio';
 import { Separator } from '~/components/ui/separator';
+import { spoonacularConfig } from '~/configs/spoonacular';
 import { spoonacular } from '~/lib/spoonacular';
 
-interface PageProps {
+export interface RecipeDetailPageProps {
   params: { recipe_id: string };
 }
 
-export default async function RecipeDetailPage({ params }: PageProps) {
+export default async function RecipeDetailPage({
+  params,
+}: RecipeDetailPageProps) {
   const recipe = await spoonacular.getRecipeInformationById(
     Number(params.recipe_id)
   );
@@ -55,7 +58,7 @@ export default async function RecipeDetailPage({ params }: PageProps) {
                     <AspectRatio ratio={1 / 1}>
                       <Image
                         fill
-                        src={`https://spoonacular.com/cdn/ingredients_100x100/${ingredient.image}`}
+                        src={`${spoonacularConfig.ingredientImageBaseUrl}/${ingredient.image}`}
                         alt={ingredient.name}
                         className="rounded-lg border object-contain p-2"
                       />
