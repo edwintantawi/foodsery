@@ -17,9 +17,9 @@ class SpoonacularAPI {
     return url;
   }
 
-  // Get n random recipes
+  // Get n random daily recipes
   // https://spoonacular.com/food-api/docs#Get-Random-Recipes
-  async getRandomRecipes(number: number): Promise<RecipeInformation[]> {
+  async getRandomDailyRecipes(number: number): Promise<RecipeInformation[]> {
     const endpoint = this.buildEndpoint('/recipes/random', {
       number: number.toString(),
       limitLicense: 'true',

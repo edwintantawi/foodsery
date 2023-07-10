@@ -3,7 +3,7 @@ import { ScrollArea, ScrollBar } from '~/components/ui/scroll-area';
 import { spoonacular } from '~/lib/spoonacular';
 
 export async function DailyRecipes() {
-  const recipes = await spoonacular.getRandomRecipes(16);
+  const recipes = await spoonacular.getRandomDailyRecipes(16);
 
   return (
     <ScrollArea>
