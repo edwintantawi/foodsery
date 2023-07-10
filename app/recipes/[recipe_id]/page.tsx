@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Metadata } from 'next';
 import Image from 'next/image';
 
 import { Balancer } from 'react-wrap-balancer';
@@ -10,9 +11,23 @@ import { AspectRatio } from '~/components/ui/aspect-ratio';
 import { Separator } from '~/components/ui/separator';
 import { spoonacularConfig } from '~/configs/spoonacular';
 import { spoonacular } from '~/lib/spoonacular';
+import { sanitizeText } from '~/lib/utils';
 
 export interface RecipeDetailPageProps {
   params: { recipe_id: string };
+}
+
+export async function generateMetadata({
+  params,
+}: RecipeDetailPageProps): Promise<Metadata> {
+  const recipe = await spoonacular.getRecipeInformationById(
+    Number(params.recipe_id)
+  );
+
+  return {
+    title: recipe.title,
+    description: sanitizeText(recipe.summary),
+  };
 }
 
 export default async function RecipeDetailPage({

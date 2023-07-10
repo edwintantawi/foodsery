@@ -9,7 +9,10 @@ import { cn } from '~/lib/utils';
 import '~/app/style.css';
 
 export const metadata: Metadata = {
-  title: siteConfig.name,
+  title: {
+    default: siteConfig.name,
+    template: `%s - ${siteConfig.name}`,
+  },
   description: siteConfig.description,
   manifest: '/manifest.json',
   metadataBase: new URL(siteConfig.url),
