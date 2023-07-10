@@ -18,7 +18,7 @@ export default function Page() {
 
       <Section
         icon={<Icons.Leaf className="aspect-square w-5" />}
-        title="The Dessert Land"
+        title="The Vegetarian Ways"
         subtitle="Vegetarians need not worry, this is for you!"
       >
         <VegetarianRecipes />
