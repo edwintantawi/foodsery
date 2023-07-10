@@ -22,7 +22,6 @@ class SpoonacularAPI {
   async getRandomDailyRecipes(number: number): Promise<RecipeInformation[]> {
     const endpoint = this.buildEndpoint('/recipes/random', {
       number: number.toString(),
-      limitLicense: 'true',
     });
     const response = await fetch(endpoint, {
       // Revalidate every 24 hours
@@ -39,7 +38,6 @@ class SpoonacularAPI {
   ): Promise<RecipeInformation[]> {
     const endpoint = this.buildEndpoint('/recipes/random', {
       number: number.toString(),
-      limitLicense: 'true',
       tags: 'vegetarian',
     });
     const response = await fetch(endpoint, {
@@ -55,7 +53,6 @@ class SpoonacularAPI {
   async getRandomDessertRecipes(number: number): Promise<RecipeInformation[]> {
     const endpoint = this.buildEndpoint('/recipes/random', {
       number: number.toString(),
-      limitLicense: 'true',
       tags: 'dessert',
     });
     const response = await fetch(endpoint, {
