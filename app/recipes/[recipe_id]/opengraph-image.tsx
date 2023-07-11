@@ -25,87 +25,92 @@ async function getInterBoldFont() {
 export default async function OpengraphImage({
   params,
 }: RecipeDetailPageProps) {
-  const interBoldFont = await getInterBoldFont();
+  try {
+    const interBoldFont = await getInterBoldFont();
 
-  const recipe = await spoonacular.getRecipeInformationById(
-    Number(params.recipe_id)
-  );
+    const recipe = await spoonacular.getRecipeInformationById(
+      Number(params.recipe_id)
+    );
 
-  if (recipe === null) {
-    return NextResponse.json(null, { status: 404 });
-  }
+    if (recipe === null) {
+      return NextResponse.json(null, { status: 404 });
+    }
 
-  return new ImageResponse(
-    (
-      <div
-        style={{
-          display: 'flex',
-          background: 'white',
-          width: '100%',
-          height: '100%',
-        }}
-      >
-        {recipe.image ? (
-          <div style={{ display: 'flex', position: 'relative' }}>
-            <img
-              src={recipe.image}
-              alt=""
-              width={400}
-              height={630}
-              style={{ objectFit: 'cover' }}
-            />
-            <div
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                backgroundImage: 'linear-gradient(to left, #ffffff, #ffffff00)',
-              }}
-            />
-          </div>
-        ) : null}
+    return new ImageResponse(
+      (
         <div
           style={{
             display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            padding: '60px 60px 60px 20px',
-            paddingRight: recipe.image ? '60px' : '120px',
-            paddingLeft: recipe.image ? '20px' : '120px',
-            width: recipe.image ? '800px' : '100%',
+            background: 'white',
+            width: '100%',
+            height: '100%',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Icons.Brand size={48} />
-            <h2 style={{ fontSize: '30px' }}>{siteConfig.name}</h2>
-          </div>
-          <h1
+          {recipe.image ? (
+            <div style={{ display: 'flex', position: 'relative' }}>
+              <img
+                src={recipe.image}
+                alt=""
+                width={400}
+                height={630}
+                style={{ objectFit: 'cover' }}
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  backgroundImage:
+                    'linear-gradient(to left, #ffffff, #ffffff00)',
+                }}
+              />
+            </div>
+          ) : null}
+          <div
             style={{
-              fontSize: '60px',
-              display: '-webkit-box',
-              WebkitLineClamp: 3,
-              WebkitBoxOrient: 'vertical',
-              textOverflow: 'ellipsis',
-              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              padding: '60px 60px 60px 20px',
+              paddingRight: recipe.image ? '60px' : '120px',
+              paddingLeft: recipe.image ? '20px' : '120px',
+              width: recipe.image ? '800px' : '100%',
             }}
           >
-            {recipe.title}
-          </h1>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Icons.Brand size={48} />
+              <h2 style={{ fontSize: '30px' }}>{siteConfig.name}</h2>
+            </div>
+            <h1
+              style={{
+                fontSize: '60px',
+                display: '-webkit-box',
+                WebkitLineClamp: 3,
+                WebkitBoxOrient: 'vertical',
+                textOverflow: 'ellipsis',
+                overflow: 'hidden',
+              }}
+            >
+              {recipe.title}
+            </h1>
+          </div>
         </div>
-      </div>
-    ),
-    {
-      ...size,
-      fonts: [
-        {
-          name: 'Inter',
-          data: interBoldFont,
-          style: 'normal',
-          weight: 700,
-        },
-      ],
-    }
-  );
+      ),
+      {
+        ...size,
+        fonts: [
+          {
+            name: 'Inter',
+            data: interBoldFont,
+            style: 'normal',
+            weight: 700,
+          },
+        ],
+      }
+    );
+  } catch (error) {
+    return NextResponse.json(null, { status: 500 });
+  }
 }
