@@ -27,6 +27,11 @@ class SpoonacularAPI {
       // Revalidate every 24 hours
       next: { revalidate: 60 * 60 * 24 },
     });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch');
+    }
+
     const data = await response.json();
     return data.recipes;
   }
@@ -44,6 +49,11 @@ class SpoonacularAPI {
       // Revalidate every 1 week
       next: { revalidate: 60 * 60 * 24 * 7 },
     });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch');
+    }
+
     const data = await response.json();
     return data.recipes;
   }
@@ -59,6 +69,11 @@ class SpoonacularAPI {
       // Revalidate every 1 week
       next: { revalidate: 60 * 60 * 24 * 7 },
     });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch');
+    }
+
     const data = await response.json();
     return data.recipes;
   }
@@ -71,6 +86,11 @@ class SpoonacularAPI {
       // Revalidate every 24 hours
       next: { revalidate: 60 * 60 * 24 },
     });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch');
+    }
+
     const data = await response.json();
     return data.text;
   }
@@ -86,7 +106,10 @@ class SpoonacularAPI {
       cache: 'force-cache',
     });
 
-    if (response.status === 404) return null;
+    if (!response.ok) {
+      if (response.status === 404) return null;
+      throw new Error('Failed to fetch');
+    }
 
     const data = await response.json();
     return data;

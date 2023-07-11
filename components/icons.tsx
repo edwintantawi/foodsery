@@ -10,7 +10,9 @@ import {
   LucideProps,
   MapIcon,
   PackageOpenIcon,
+  RepeatIcon,
   SearchIcon,
+  ServerCrashIcon,
   XIcon,
 } from 'lucide-react';
 
@@ -54,5 +56,7 @@ export const Icons = {
   Instruction: MapIcon,
   NotFound: PackageOpenIcon,
   Back: ArrowLeftIcon,
+  ServerError: ServerCrashIcon,
+  TryAgain: RepeatIcon,
   Github: GithubIcon,
 };

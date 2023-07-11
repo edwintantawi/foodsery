@@ -22,25 +22,29 @@ export interface RecipeDetailPageProps {
 export async function generateMetadata({
   params,
 }: RecipeDetailPageProps): Promise<Metadata> {
-  const recipe = await spoonacular.getRecipeInformationById(
-    Number(params.recipe_id)
-  );
+  try {
+    const recipe = await spoonacular.getRecipeInformationById(
+      Number(params.recipe_id)
+    );
 
-  if (recipe === null) {
+    if (recipe === null) {
+      return {
+        title: constant.notFound.title,
+        description: constant.notFound.description,
+      };
+    }
+
     return {
-      title: constant.notFound.title,
-      description: constant.notFound.description,
-    };
-  }
-
-  return {
-    title: recipe.title,
-    description: sanitizeText(recipe.summary),
-    openGraph: {
       title: recipe.title,
       description: sanitizeText(recipe.summary),
-    },
-  };
+      openGraph: {
+        title: recipe.title,
+        description: sanitizeText(recipe.summary),
+      },
+    };
+  } catch (error) {
+    return {};
+  }
 }
 
 export default async function RecipeDetailPage({

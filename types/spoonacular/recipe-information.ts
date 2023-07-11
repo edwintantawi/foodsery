@@ -67,7 +67,7 @@ export type ExtendedIngredient = {
   amount: number;
   consitency: 'SOLID' | 'LIQUID';
   id: number;
-  image: string;
+  image: string | null;
   measures: Measures;
   meta: string[];
   name: string;

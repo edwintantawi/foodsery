@@ -17,12 +17,19 @@ export function IngredientCard({ ingredient }: IngredientCardProps) {
     ingredient.unit = ingredient.amount > 1 ? 'Items' : 'Item';
   }
 
+  // ingredient image can be null
+  // add .png at the end of the url to use the default image from api if the image is null
+  const image =
+    `${spoonacularConfig.ingredientImageBaseUrl}/` +
+    ingredient.image +
+    (ingredient.image === null ? '.png' : '');
+
   return (
     <article className="grid grid-cols-[80px,1fr] space-x-3 rounded-lg border p-2">
       <AspectRatio ratio={1 / 1}>
         <Image
           fill
-          src={`${spoonacularConfig.ingredientImageBaseUrl}/${ingredient.image}`}
+          src={image}
           alt={ingredient.name}
           className="rounded-lg border object-contain p-2"
         />
