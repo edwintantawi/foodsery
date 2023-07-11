@@ -30,10 +30,6 @@ export async function generateMetadata({
     return {
       title: constant.notFound.title,
       description: constant.notFound.description,
-      openGraph: {
-        title: constant.notFound.title,
-        description: constant.notFound.description,
-      },
     };
   }
 

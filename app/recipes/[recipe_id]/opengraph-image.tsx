@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import { ImageResponse } from 'next/server';
+import { ImageResponse, NextResponse } from 'next/server';
 
-import { constant } from '~/app/recipes/[recipe_id]/constant';
 import { RecipeDetailPageProps } from '~/app/recipes/[recipe_id]/page';
 import { Icons } from '~/components/icons';
 import { siteConfig } from '~/configs/site';
@@ -32,6 +31,10 @@ export default async function OpengraphImage({
     Number(params.recipe_id)
   );
 
+  if (recipe === null) {
+    return NextResponse.json(null, { status: 404 });
+  }
+
   return new ImageResponse(
     (
       <div
@@ -42,7 +45,7 @@ export default async function OpengraphImage({
           height: '100%',
         }}
       >
-        {recipe?.image ? (
+        {recipe.image ? (
           <div style={{ display: 'flex', position: 'relative' }}>
             <img
               src={recipe.image}
@@ -67,11 +70,11 @@ export default async function OpengraphImage({
           style={{
             display: 'flex',
             flexDirection: 'column',
-            padding: '60px 60px 60px 20px',
-            paddingRight: recipe?.image ? '60px' : '120px',
-            paddingLeft: recipe?.image ? '20px' : '120px',
             justifyContent: 'center',
-            width: recipe?.image ? '800px' : '100%',
+            padding: '60px 60px 60px 20px',
+            paddingRight: recipe.image ? '60px' : '120px',
+            paddingLeft: recipe.image ? '20px' : '120px',
+            width: recipe.image ? '800px' : '100%',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -88,11 +91,8 @@ export default async function OpengraphImage({
               overflow: 'hidden',
             }}
           >
-            {recipe?.title ?? constant.notFound.title}
+            {recipe.title}
           </h1>
-          <p style={{ fontSize: '32px', color: 'gray', marginTop: '-8px' }}>
-            {recipe === null ? constant.notFound.description : ''}
-          </p>
         </div>
       </div>
     ),
