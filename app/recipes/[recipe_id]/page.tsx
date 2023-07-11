@@ -7,11 +7,11 @@ import { Balancer } from 'react-wrap-balancer';
 
 import { constant } from '~/app/recipes/[recipe_id]/constant';
 import { Icons } from '~/components/icons';
+import { IngredientCard } from '~/components/ingredient-card';
 import { RecipeSummary } from '~/components/recipe-summary';
 import { Section } from '~/components/section';
 import { AspectRatio } from '~/components/ui/aspect-ratio';
 import { Separator } from '~/components/ui/separator';
-import { spoonacularConfig } from '~/configs/spoonacular';
 import { spoonacular } from '~/lib/spoonacular';
 import { sanitizeText } from '~/lib/utils';
 
@@ -70,6 +70,7 @@ export default async function RecipeDetailPage({
           <Separator className="my-3" />
           <RecipeSummary>{recipe.summary}</RecipeSummary>
         </header>
+
         <Section
           icon={<Icons.Ingredient />}
           title="Ingredients"
@@ -77,39 +78,9 @@ export default async function RecipeDetailPage({
         >
           <ul className="grid grid-cols-1 gap-2 sm:grid-cols-1">
             {recipe.extendedIngredients.map((ingredient) => {
-              const isUnitNotExist = ingredient.unit === '';
-              if (isUnitNotExist) {
-                ingredient.unit = ingredient.amount > 1 ? 'Items' : 'Item';
-              }
-
               return (
                 <li key={ingredient.id}>
-                  <article className="grid grid-cols-[80px,1fr] space-x-3 rounded-lg border p-2">
-                    <AspectRatio ratio={1 / 1}>
-                      <Image
-                        fill
-                        src={`${spoonacularConfig.ingredientImageBaseUrl}/${ingredient.image}`}
-                        alt={ingredient.name}
-                        className="rounded-lg border object-contain p-2"
-                      />
-                    </AspectRatio>
-                    <header className="flex flex-col justify-center py-2">
-                      <h3 className="text-sm font-bold">
-                        {ingredient.nameClean}
-                      </h3>
-                      <p className="text-xs lg:text-sm">
-                        {ingredient.originalName}
-                      </p>
-                      <p className="mt-1 text-xs text-muted-foreground lg:text-sm">
-                        <em>
-                          {ingredient.measures.metric.amount}{' '}
-                          {isUnitNotExist
-                            ? ingredient.unit
-                            : ingredient.measures.metric.unitLong}
-                        </em>
-                      </p>
-                    </header>
-                  </article>
+                  <IngredientCard ingredient={ingredient} />
                 </li>
               );
             })}
