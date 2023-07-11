@@ -77,11 +77,17 @@ class SpoonacularAPI {
 
   // Get recipes information by id
   // https://spoonacular.com/food-api/docs#Get-Recipe-Information
-  async getRecipeInformationById(id: number): Promise<RecipeInformation> {
+  async getRecipeInformationById(
+    id: number
+  ): Promise<RecipeInformation | null> {
     const endpoint = this.buildEndpoint(`/recipes/${id}/information`);
+
     const response = await fetch(endpoint, {
       cache: 'force-cache',
     });
+
+    if (response.status === 404) return null;
+
     const data = await response.json();
     return data;
   }

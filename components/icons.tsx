@@ -1,4 +1,5 @@
 import {
+  ArrowLeftIcon,
   BookIcon,
   BookOpenIcon,
   CakeSliceIcon,
@@ -8,6 +9,7 @@ import {
   LightbulbIcon,
   LucideProps,
   MapIcon,
+  PackageOpenIcon,
   SearchIcon,
   XIcon,
 } from 'lucide-react';
@@ -50,5 +52,7 @@ export const Icons = {
   BookOpen: BookOpenIcon,
   Ingredient: BookIcon,
   Instruction: MapIcon,
+  NotFound: PackageOpenIcon,
+  Back: ArrowLeftIcon,
   Github: GithubIcon,
 };

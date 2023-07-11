@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { Metadata } from 'next';
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
 
 import { Balancer } from 'react-wrap-balancer';
 
+import { constant } from '~/app/recipes/[recipe_id]/constant';
 import { Icons } from '~/components/icons';
 import { RecipeSummary } from '~/components/recipe-summary';
 import { Section } from '~/components/section';
@@ -24,6 +26,17 @@ export async function generateMetadata({
     Number(params.recipe_id)
   );
 
+  if (recipe === null) {
+    return {
+      title: constant.notFound.title,
+      description: constant.notFound.description,
+      openGraph: {
+        title: constant.notFound.title,
+        description: constant.notFound.description,
+      },
+    };
+  }
+
   return {
     title: recipe.title,
     description: sanitizeText(recipe.summary),
@@ -40,6 +53,8 @@ export default async function RecipeDetailPage({
   const recipe = await spoonacular.getRecipeInformationById(
     Number(params.recipe_id)
   );
+
+  if (recipe === null) return notFound();
 
   return (
     <main className="container flex-1 pt-4">

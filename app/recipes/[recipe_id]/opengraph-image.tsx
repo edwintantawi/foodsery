@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { ImageResponse } from 'next/server';
 
+import { constant } from '~/app/recipes/[recipe_id]/constant';
 import { RecipeDetailPageProps } from '~/app/recipes/[recipe_id]/page';
 import { Icons } from '~/components/icons';
 import { siteConfig } from '~/configs/site';
@@ -41,21 +42,14 @@ export default async function OpengraphImage({
           height: '100%',
         }}
       >
-        {recipe.image ? (
-          <div
-            style={{
-              display: 'flex',
-              position: 'relative',
-            }}
-          >
+        {recipe?.image ? (
+          <div style={{ display: 'flex', position: 'relative' }}>
             <img
               src={recipe.image}
               alt=""
               width={400}
               height={630}
-              style={{
-                objectFit: 'cover',
-              }}
+              style={{ objectFit: 'cover' }}
             />
             <div
               style={{
@@ -74,19 +68,13 @@ export default async function OpengraphImage({
             display: 'flex',
             flexDirection: 'column',
             padding: '60px 60px 60px 20px',
-            paddingRight: recipe.image ? '60px' : '120px',
-            paddingLeft: recipe.image ? '20px' : '120px',
+            paddingRight: recipe?.image ? '60px' : '120px',
+            paddingLeft: recipe?.image ? '20px' : '120px',
             justifyContent: 'center',
-            width: recipe.image ? '800px' : '100%',
+            width: recipe?.image ? '800px' : '100%',
           }}
         >
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-            }}
-          >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <Icons.Brand size={48} />
             <h2 style={{ fontSize: '30px' }}>{siteConfig.name}</h2>
           </div>
@@ -100,8 +88,11 @@ export default async function OpengraphImage({
               overflow: 'hidden',
             }}
           >
-            {recipe.title}
+            {recipe?.title ?? constant.notFound.title}
           </h1>
+          <p style={{ fontSize: '32px', color: 'gray', marginTop: '-8px' }}>
+            {recipe === null ? constant.notFound.description : ''}
+          </p>
         </div>
       </div>
     ),
