@@ -123,7 +123,7 @@ export default async function RecipeDetailPage({
         >
           <div
             dangerouslySetInnerHTML={{ __html: recipe.instructions }}
-            className="text-sm sm:text-base [&>*]:ml-6 [&>*]:list-decimal"
+            className="text-sm sm:text-base [&>*]:ml-6 [&>*]:list-decimal [&_li]:mb-3"
           />
         </Section>
       </article>
