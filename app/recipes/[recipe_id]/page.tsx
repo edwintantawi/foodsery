@@ -13,7 +13,12 @@ import { Section } from '~/components/section';
 import { AspectRatio } from '~/components/ui/aspect-ratio';
 import { Separator } from '~/components/ui/separator';
 import { spoonacular } from '~/lib/spoonacular';
-import { getRecipeImageById, sanitizeText } from '~/lib/utils';
+import {
+  getIngredientImageByFileName,
+  getIngredientMeasurement,
+  getRecipeImageById,
+  sanitizeText,
+} from '~/lib/utils';
 
 export interface RecipeDetailPageProps {
   params: { recipe_id: string };
@@ -82,9 +87,19 @@ export default async function RecipeDetailPage({
         >
           <ul className="grid grid-cols-1 gap-2 sm:grid-cols-1">
             {recipe.extendedIngredients.map((ingredient) => {
+              const image = getIngredientImageByFileName(ingredient.image);
+              const measurement = getIngredientMeasurement(
+                ingredient.measures.metric
+              );
+
               return (
                 <li key={ingredient.id}>
-                  <IngredientCard ingredient={ingredient} />
+                  <IngredientCard
+                    title={ingredient.name}
+                    subTitle={ingredient.originalName}
+                    image={image}
+                    measurement={measurement}
+                  />
                 </li>
               );
             })}
