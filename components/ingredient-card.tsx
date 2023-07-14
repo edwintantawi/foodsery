@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Balancer } from 'react-wrap-balancer';
 
 import { AspectRatio } from '~/components/ui/aspect-ratio';
-import { spoonacularConfig } from '~/configs/spoonacular';
+import { getIngredientImageByFileName } from '~/lib/utils';
 import { ExtendedIngredient } from '~/types/spoonacular/recipe-information';
 
 interface IngredientCardProps {
@@ -12,17 +12,13 @@ interface IngredientCardProps {
 }
 
 export function IngredientCard({ ingredient }: IngredientCardProps) {
+  // some ingredients do not have units because they represent 1 item of ingredient
   const isUnitNotExist = ingredient.unit === '';
   if (isUnitNotExist) {
     ingredient.unit = ingredient.amount > 1 ? 'Items' : 'Item';
   }
 
-  // ingredient image can be null
-  // add .png at the end of the url to use the default image from api if the image is null
-  const image =
-    `${spoonacularConfig.ingredientImageBaseUrl}/` +
-    ingredient.image +
-    (ingredient.image === null ? '.png' : '');
+  const image = getIngredientImageByFileName(ingredient.image);
 
   return (
     <article className="grid grid-cols-[80px,1fr] space-x-3 rounded-lg border p-2">
