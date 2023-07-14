@@ -5,6 +5,7 @@ import { RecipeDetailPageProps } from '~/app/recipes/[recipe_id]/page';
 import { Icons } from '~/components/icons';
 import { siteConfig } from '~/configs/site';
 import { spoonacular } from '~/lib/spoonacular';
+import { getRecipeImageById } from '~/lib/utils';
 
 export const runtime = 'edge';
 
@@ -46,37 +47,34 @@ export default async function OpengraphImage({
             height: '100%',
           }}
         >
-          {recipe.image ? (
-            <div style={{ display: 'flex', position: 'relative' }}>
-              <img
-                src={recipe.image}
-                alt=""
-                width={400}
-                height={630}
-                style={{ objectFit: 'cover' }}
-              />
-              <div
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  backgroundImage:
-                    'linear-gradient(to left, #ffffff, #ffffff00)',
-                }}
-              />
-            </div>
-          ) : null}
+          <div style={{ display: 'flex', position: 'relative' }}>
+            <img
+              src={getRecipeImageById(recipe.id)}
+              alt=""
+              width={400}
+              height={630}
+              style={{ objectFit: 'cover' }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundImage: 'linear-gradient(to left, #ffffff, #ffffff00)',
+              }}
+            />
+          </div>
           <div
             style={{
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
               padding: '60px 60px 60px 20px',
-              paddingRight: recipe.image ? '60px' : '120px',
-              paddingLeft: recipe.image ? '20px' : '120px',
-              width: recipe.image ? '800px' : '100%',
+              paddingRight: '60px',
+              paddingLeft: '20px',
+              width: '800px',
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
