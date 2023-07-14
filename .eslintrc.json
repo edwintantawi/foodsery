@@ -21,7 +21,7 @@
   },
   "rules": {
     "semi": ["error", "always"],
-    "quotes": ["error", "single"],
+    "quotes": ["error", "single", { "avoidEscape": true }],
     "no-tabs": ["error", { "allowIndentationTabs": false }],
     "jsx-quotes": ["error", "prefer-double"],
     "linebreak-style": ["error", "unix"],
