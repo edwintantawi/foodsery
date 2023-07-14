@@ -1,6 +1,7 @@
 import { RecipeCard } from '~/components/recipe-card';
 import { ScrollArea, ScrollBar } from '~/components/ui/scroll-area';
 import { spoonacular } from '~/lib/spoonacular';
+import { getRecipeImageById } from '~/lib/utils';
 
 export async function DessertRecipes() {
   const recipes = await spoonacular.getRandomDessertRecipes(16);
@@ -13,7 +14,7 @@ export async function DessertRecipes() {
             <RecipeCard
               id={recipe.id}
               title={recipe.title}
-              image={recipe.image}
+              image={getRecipeImageById(recipe.id)}
             />
           </li>
         ))}

@@ -13,7 +13,7 @@ import { Section } from '~/components/section';
 import { AspectRatio } from '~/components/ui/aspect-ratio';
 import { Separator } from '~/components/ui/separator';
 import { spoonacular } from '~/lib/spoonacular';
-import { sanitizeText } from '~/lib/utils';
+import { getRecipeImageById, sanitizeText } from '~/lib/utils';
 
 export interface RecipeDetailPageProps {
   params: { recipe_id: string };
@@ -63,7 +63,7 @@ export default async function RecipeDetailPage({
           <AspectRatio ratio={2 / 1}>
             <Image
               fill
-              src={recipe.image ?? '/cover.png'}
+              src={getRecipeImageById(recipe.id, '636x393')}
               alt={recipe.title}
               className="rounded-lg border object-cover"
             />

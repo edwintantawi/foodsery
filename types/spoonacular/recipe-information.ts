@@ -1,7 +1,9 @@
 export type RecipeInformation = {
   id: number;
   title: string;
-  image?: string;
+  // image property is inconsistent across APIs
+  // use utilitiy function getRecipeImageById to get the image url
+  // image?: string;
   imageType: string;
   servings: number;
   readyInMinutes: number;
