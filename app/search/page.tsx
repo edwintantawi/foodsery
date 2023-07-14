@@ -45,8 +45,8 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     <main className="container flex-1">
       <header className="my-4 rounded-md border bg-background px-3 py-2">
         <h1 className="text-muted-foreground">
-          Search results for
-          <span className="font-bold">
+          Search results for{' '}
+          <span className="font-bold text-foreground">
             {searchParams.q ?? 'nothing there!'}
           </span>
         </h1>
