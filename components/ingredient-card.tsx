@@ -4,7 +4,10 @@ import Image from 'next/image';
 import { Balancer } from 'react-wrap-balancer';
 
 import { AspectRatio } from '~/components/ui/aspect-ratio';
-import { getIngredientImageByFileName } from '~/lib/utils';
+import {
+  getIngredientImageByFileName,
+  getIngredientMeasurement,
+} from '~/lib/utils';
 import { ExtendedIngredient } from '~/types/spoonacular/recipe-information';
 
 interface IngredientCardProps {
@@ -12,12 +15,6 @@ interface IngredientCardProps {
 }
 
 export function IngredientCard({ ingredient }: IngredientCardProps) {
-  // some ingredients do not have units because they represent 1 item of ingredient
-  const isUnitNotExist = ingredient.unit === '';
-  if (isUnitNotExist) {
-    ingredient.unit = ingredient.amount > 1 ? 'Items' : 'Item';
-  }
-
   const image = getIngredientImageByFileName(ingredient.image);
 
   return (
@@ -36,12 +33,7 @@ export function IngredientCard({ ingredient }: IngredientCardProps) {
           <Balancer>{ingredient.originalName}</Balancer>
         </p>
         <p className="mt-1 text-xs text-muted-foreground lg:text-sm">
-          <em>
-            {ingredient.measures.metric.amount}{' '}
-            {isUnitNotExist
-              ? ingredient.unit
-              : ingredient.measures.metric.unitLong}
-          </em>
+          <em>{getIngredientMeasurement(ingredient.measures.metric)}</em>
         </p>
       </header>
     </article>

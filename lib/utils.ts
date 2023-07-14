@@ -5,6 +5,7 @@ import {
   IngredientImageSize,
   RecipeImageSize,
 } from '~/types/spoonacular/image';
+import { Metric } from '~/types/spoonacular/recipe-information';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -36,4 +37,16 @@ export function getIngredientImageByFileName(
   return `https://spoonacular.com/cdn/ingredients_${imageSize}/${
     fileName ?? 'unknown.png'
   }`;
+}
+
+// getIngredientMeasurement
+// Returns readable ingredient measurement from ingredient matric
+export function getIngredientMeasurement(matric: Metric) {
+  let unit = matric.unitLong;
+  // matric.unitLong can be empty
+  if (unit === '') {
+    unit = matric.amount > 1 ? 'Items' : 'item';
+  }
+
+  return `${matric.amount} ${unit}`;
 }
