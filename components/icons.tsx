@@ -12,6 +12,7 @@ import {
   PackageOpenIcon,
   RepeatIcon,
   SearchIcon,
+  SearchXIcon,
   ServerCrashIcon,
   XIcon,
 } from 'lucide-react';
@@ -54,9 +55,10 @@ export const Icons = {
   BookOpen: BookOpenIcon,
   Ingredient: BookIcon,
   Instruction: MapIcon,
-  NotFound: PackageOpenIcon,
+  Empty: PackageOpenIcon,
   Back: ArrowLeftIcon,
   ServerError: ServerCrashIcon,
   TryAgain: RepeatIcon,
+  NotFound: SearchXIcon,
   Github: GithubIcon,
 };

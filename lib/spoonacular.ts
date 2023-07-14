@@ -1,4 +1,5 @@
 import { RecipeInformation } from '~/types/spoonacular/recipe-information';
+import { RecipeSearchResult } from '~/types/spoonacular/recipe-search';
 
 class SpoonacularAPI {
   private baseURL = 'https://api.spoonacular.com';
@@ -113,6 +114,25 @@ class SpoonacularAPI {
 
     const data = await response.json();
     return data;
+  }
+
+  // Get recipes by search query
+  // https://spoonacular.com/food-api/docs#Search-Recipes-Complex
+  async searchRecipesByQuery(query: string): Promise<RecipeSearchResult[]> {
+    const endpoint = this.buildEndpoint('/recipes/complexSearch', {
+      query,
+    });
+
+    const response = await fetch(endpoint, {
+      cache: 'force-cache',
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch');
+    }
+
+    const data = await response.json();
+    return data.results;
   }
 }
 
