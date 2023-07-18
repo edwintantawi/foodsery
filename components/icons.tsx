@@ -1,5 +1,6 @@
 import {
   ArrowLeftIcon,
+  BarChart3Icon,
   BookIcon,
   BookOpenIcon,
   CakeSliceIcon,
@@ -7,6 +8,7 @@ import {
   GithubIcon,
   LeafIcon,
   LightbulbIcon,
+  Loader2Icon,
   LucideProps,
   MapIcon,
   PackageOpenIcon,
@@ -60,5 +62,7 @@ export const Icons = {
   ServerError: ServerCrashIcon,
   TryAgain: RepeatIcon,
   NotFound: SearchXIcon,
+  Loader: Loader2Icon,
+  Analyze: BarChart3Icon,
   Github: GithubIcon,
 };
