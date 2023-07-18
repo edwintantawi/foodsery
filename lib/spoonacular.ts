@@ -1,4 +1,3 @@
-import { QuotaExceededError, UnexpectedError } from '~/lib/exceptions';
 import { RecipeInformation } from '~/types/spoonacular/recipe-information';
 import { RecipeSearchResult } from '~/types/spoonacular/recipe-search';
 
@@ -30,12 +29,8 @@ class SpoonacularAPI {
       next: { revalidate: 60 * 60 * 24 },
     });
 
-    if (response.status === 402) {
-      throw new QuotaExceededError();
-    }
-
     if (!response.ok) {
-      throw new UnexpectedError();
+      throw new Error();
     }
 
     const data = await response.json();
@@ -56,12 +51,8 @@ class SpoonacularAPI {
       next: { revalidate: 60 * 60 * 24 * 7 },
     });
 
-    if (response.status === 402) {
-      throw new QuotaExceededError();
-    }
-
     if (!response.ok) {
-      throw new UnexpectedError();
+      throw new Error();
     }
 
     const data = await response.json();
@@ -80,12 +71,8 @@ class SpoonacularAPI {
       next: { revalidate: 60 * 60 * 24 * 7 },
     });
 
-    if (response.status === 402) {
-      throw new QuotaExceededError();
-    }
-
     if (!response.ok) {
-      throw new UnexpectedError();
+      throw new Error();
     }
 
     const data = await response.json();
@@ -101,12 +88,8 @@ class SpoonacularAPI {
       next: { revalidate: 60 * 60 * 24 },
     });
 
-    if (response.status === 402) {
-      throw new QuotaExceededError();
-    }
-
     if (!response.ok) {
-      throw new UnexpectedError();
+      throw new Error();
     }
 
     const data = await response.json();
@@ -124,13 +107,9 @@ class SpoonacularAPI {
       cache: 'force-cache',
     });
 
-    if (response.status === 402) {
-      throw new QuotaExceededError();
-    }
-
     if (!response.ok) {
       if (response.status === 404) return null;
-      throw new UnexpectedError();
+      throw new Error();
     }
 
     const data = await response.json();
@@ -148,12 +127,8 @@ class SpoonacularAPI {
       cache: 'force-cache',
     });
 
-    if (response.status === 402) {
-      throw new QuotaExceededError();
-    }
-
     if (!response.ok) {
-      throw new UnexpectedError();
+      throw new Error();
     }
 
     const data = await response.json();
