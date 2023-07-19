@@ -1,10 +1,21 @@
 'use client';
 
 import * as React from 'react';
+import Link from 'next/link';
 
 import { analyzeFoodImageAction } from '~/app/analyze/actions';
 import { Header } from '~/components/header';
 import { Icons } from '~/components/icons';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '~/components/ui/alert-dialog';
 import { Button } from '~/components/ui/button';
 import {
   Sheet,
@@ -23,7 +34,10 @@ export default function AnalyzePage() {
   const [result, setResult] = React.useState<FoodAnalyzeResult | null>(null);
   const [isPending, startTransition] = React.useTransition();
 
-  const videoElementRef = useVideoStream();
+  const [
+    videoElementRef,
+    { error: videoStreamError, retry: retryVideoStream },
+  ] = useVideoStream();
   const [
     canvasElementRef,
     { drawImageToCanvas, getImageFromCanvas, clearCanvas },
@@ -73,7 +87,7 @@ export default function AnalyzePage() {
       <div className="relative flex-1">
         <video
           ref={videoElementRef}
-          className="absolute inset-0 h-full w-full flex-1 rounded-lg border object-cover"
+          className="absolute inset-0 h-full w-full flex-1 rounded-lg border bg-muted object-cover"
           autoPlay
           muted
         />
@@ -120,6 +134,28 @@ export default function AnalyzePage() {
             </div>
           </SheetContent>
         </Sheet>
+
+        <AlertDialog open={videoStreamError !== null}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>
+                Failed to Access Device Camera!
+              </AlertDialogTitle>
+              <AlertDialogDescription>
+                Please make sure you have granted access to your device camera
+                and try again
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel asChild>
+                <Link href="/">Back</Link>
+              </AlertDialogCancel>
+              <AlertDialogAction onClick={retryVideoStream}>
+                Try again
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
     </main>
   );
