@@ -5,6 +5,7 @@ import {
   BookOpenIcon,
   CakeSliceIcon,
   CalendarIcon,
+  CameraIcon,
   GithubIcon,
   LeafIcon,
   LightbulbIcon,
@@ -64,5 +65,6 @@ export const Icons = {
   NotFound: SearchXIcon,
   Loader: Loader2Icon,
   Analyze: BarChart3Icon,
+  Camera: CameraIcon,
   Github: GithubIcon,
 };
