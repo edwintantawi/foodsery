@@ -10,12 +10,20 @@ interface RecipeCardProps {
   title: string;
   image: string;
   className?: string;
+  openInNewTab?: boolean;
 }
 
-export function RecipeCard({ id, title, image, className }: RecipeCardProps) {
+export function RecipeCard({
+  id,
+  title,
+  image,
+  openInNewTab = false,
+  className,
+}: RecipeCardProps) {
   return (
     <Link
       href={`/recipes/${id}`}
+      target={openInNewTab ? '_blank' : undefined}
       className={cn(
         'inline-block w-36 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
         className
