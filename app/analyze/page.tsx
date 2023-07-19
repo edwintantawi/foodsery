@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { analyzeFoodImageAction } from '~/app/analyze/actions';
 import { Header } from '~/components/header';
 import { Icons } from '~/components/icons';
+import { RecipeCard } from '~/components/recipe-card';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,6 +18,8 @@ import {
   AlertDialogTitle,
 } from '~/components/ui/alert-dialog';
 import { Button } from '~/components/ui/button';
+import { ScrollArea, ScrollBar } from '~/components/ui/scroll-area';
+import { Separator } from '~/components/ui/separator';
 import {
   Sheet,
   SheetClose,
@@ -28,6 +31,7 @@ import {
 } from '~/components/ui/sheet';
 import { useCanvas } from '~/hooks/use-canvas';
 import { useVideoStream } from '~/hooks/use-video-stream';
+import { getRecipeImageById } from '~/lib/utils';
 import { FoodAnalyzeResult } from '~/types/spoonacular/food-analyze';
 
 export default function AnalyzePage() {
@@ -111,7 +115,7 @@ export default function AnalyzePage() {
         </div>
 
         <Sheet open={result !== null}>
-          <SheetContent side="bottom">
+          <SheetContent side="bottom" className="rounded-t-3xl">
             <div className="container p-0">
               <SheetHeader>
                 <SheetTitle>Analyze Result</SheetTitle>
@@ -125,7 +129,54 @@ export default function AnalyzePage() {
                   probability
                 </SheetDescription>
               </SheetHeader>
-              <div className="py-4" />
+              <Separator className="my-4" />
+              <div className="mb-4">
+                <ul className="space-y-1 text-sm">
+                  <li className="flex items-center justify-between">
+                    <span className="font-bold">Calories</span>
+                    <span className="text-muted-foreground">
+                      {result?.nutrition.calories.value}{' '}
+                      {result?.nutrition.calories.unit}
+                    </span>
+                  </li>
+                  <li className="flex items-center justify-between">
+                    <span className="font-bold">Carbohydrates</span>
+                    <span className="text-muted-foreground">
+                      {result?.nutrition.carbs.value}{' '}
+                      {result?.nutrition.carbs.unit}
+                    </span>
+                  </li>
+                  <li className="flex items-center justify-between">
+                    <span className="font-bold">Fat</span>
+                    <span className="text-muted-foreground">
+                      {result?.nutrition.fat.value} {result?.nutrition.fat.unit}
+                    </span>
+                  </li>
+                  <li className="flex items-center justify-between">
+                    <span className="font-bold">Protein</span>
+                    <span className="text-muted-foreground">
+                      {result?.nutrition.protein.value}{' '}
+                      {result?.nutrition.protein.unit}
+                    </span>
+                  </li>
+                </ul>
+                <Separator className="my-4" />
+                <ScrollArea>
+                  <ul className="flex gap-1">
+                    {result?.recipes.map((recipe) => (
+                      <li key={recipe.id}>
+                        <RecipeCard
+                          openInNewTab
+                          id={recipe.id}
+                          title={recipe.title}
+                          image={getRecipeImageById(recipe.id)}
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                  <ScrollBar orientation="horizontal" />
+                </ScrollArea>
+              </div>
               <SheetFooter>
                 <SheetClose asChild>
                   <Button onClick={handleClose}>Ok and close</Button>
