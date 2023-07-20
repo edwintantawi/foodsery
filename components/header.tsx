@@ -9,11 +9,11 @@ interface HeaderProps {
 
 export function Header({ title, subTitle }: HeaderProps) {
   return (
-    <header className="my-4 rounded-md border p-4">
+    <header className="my-3 rounded-md border px-4 py-3">
       <h1 className="font-bold">
         <Balancer>{title}</Balancer>
       </h1>
-      <p className="text-xs text-muted-foreground">
+      <p className="text-sm text-muted-foreground">
         <Balancer>{subTitle}</Balancer>
       </p>
     </header>

@@ -45,10 +45,10 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   return (
     <main className="container flex-1">
       <Header
-        title="Your search result"
+        title="Your Search Result"
         subTitle={
           <React.Fragment>
-            for keyword:{' '}
+            For keyword:{' '}
             <span className="font-bold text-foreground">
               {searchParams.q ?? 'nothing there!'}
             </span>
