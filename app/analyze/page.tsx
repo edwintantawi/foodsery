@@ -42,6 +42,7 @@ export default function AnalyzePage() {
     videoElementRef,
     { error: videoStreamError, retry: retryVideoStream },
   ] = useVideoStream();
+
   const [
     canvasElementRef,
     { drawImageToCanvas, getImageFromCanvas, clearCanvas },
@@ -65,14 +66,7 @@ export default function AnalyzePage() {
 
     startTransition(async () => {
       const result = await analyzeFoodImageAction(formData);
-
-      if (result.error !== null) {
-        // TODO: show user friendly error
-        alert(result.error);
-        return;
-      }
-
-      setResult(result.payload);
+      setResult(result);
     });
   };
 
