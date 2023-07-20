@@ -1,4 +1,3 @@
-import { QuotaExceededError, UnexpectedError } from '~/lib/exceptions';
 import { FoodAnalyzeResult } from '~/types/spoonacular/food-analyze';
 import { RecipeInformation } from '~/types/spoonacular/recipe-information';
 import { RecipeSearchResult } from '~/types/spoonacular/recipe-search';
@@ -31,12 +30,8 @@ class SpoonacularAPI {
       next: { revalidate: 60 * 60 * 24 },
     });
 
-    if (response.status === 402) {
-      throw new QuotaExceededError();
-    }
-
     if (!response.ok) {
-      throw new UnexpectedError();
+      throw new Error('Failed to fetch random daily recipes');
     }
 
     const data = await response.json();
@@ -57,12 +52,8 @@ class SpoonacularAPI {
       next: { revalidate: 60 * 60 * 24 * 7 },
     });
 
-    if (response.status === 402) {
-      throw new QuotaExceededError();
-    }
-
     if (!response.ok) {
-      throw new UnexpectedError();
+      throw new Error('Failed to fetch random vegetarian recipes');
     }
 
     const data = await response.json();
@@ -81,12 +72,8 @@ class SpoonacularAPI {
       next: { revalidate: 60 * 60 * 24 * 7 },
     });
 
-    if (response.status === 402) {
-      throw new QuotaExceededError();
-    }
-
     if (!response.ok) {
-      throw new UnexpectedError();
+      throw new Error('Failed to fetch random dessert recipes');
     }
 
     const data = await response.json();
@@ -102,12 +89,8 @@ class SpoonacularAPI {
       next: { revalidate: 60 * 60 * 24 },
     });
 
-    if (response.status === 402) {
-      throw new QuotaExceededError();
-    }
-
     if (!response.ok) {
-      throw new UnexpectedError();
+      throw new Error('Failed to fetch random food trivia');
     }
 
     const data = await response.json();
@@ -125,13 +108,9 @@ class SpoonacularAPI {
       cache: 'force-cache',
     });
 
-    if (response.status === 402) {
-      throw new QuotaExceededError();
-    }
-
     if (!response.ok) {
       if (response.status === 404) return null;
-      throw new UnexpectedError();
+      throw new Error(`Failed to fetch recipe information with id "${id}"`);
     }
 
     const data = await response.json();
@@ -149,12 +128,8 @@ class SpoonacularAPI {
       cache: 'force-cache',
     });
 
-    if (response.status === 402) {
-      throw new QuotaExceededError();
-    }
-
     if (!response.ok) {
-      throw new UnexpectedError();
+      throw new Error('Failed to fetch recipes by query');
     }
 
     const data = await response.json();
@@ -174,12 +149,8 @@ class SpoonacularAPI {
       body: formData,
     });
 
-    if (response.status === 402) {
-      throw new QuotaExceededError();
-    }
-
     if (!response.ok) {
-      throw new UnexpectedError();
+      throw new Error('Failed to fetch food image analysis by file');
     }
 
     return response.json();
