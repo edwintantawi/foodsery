@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 
+import { Providers } from '~/app/providers';
 import { AppBar } from '~/components/app-bar';
 import { Footer } from '~/components/footer';
 import { siteConfig } from '~/configs/site';
@@ -47,9 +48,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
           fontMono.variable
         )}
       >
-        <AppBar />
-        {children}
-        <Footer />
+        <Providers>
+          <AppBar />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

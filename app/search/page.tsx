@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
 
 import { constant } from '~/app/search/constant';
+import { Header } from '~/components/header';
 import { RecipeCard } from '~/components/recipe-card';
 import { spoonacular } from '~/lib/spoonacular';
 import { getRecipeImageById } from '~/lib/utils';
@@ -43,14 +44,17 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
   return (
     <main className="container flex-1">
-      <header className="my-4 rounded-md border bg-background px-3 py-2">
-        <h1 className="text-muted-foreground">
-          Search results for{' '}
-          <span className="font-bold text-foreground">
-            {searchParams.q ?? 'nothing there!'}
-          </span>
-        </h1>
-      </header>
+      <Header
+        title="Your Search Result"
+        subTitle={
+          <React.Fragment>
+            For keyword:{' '}
+            <span className="font-bold text-foreground">
+              {searchParams.q ?? 'nothing there!'}
+            </span>
+          </React.Fragment>
+        }
+      />
 
       <section className="grid grid-cols-2 gap-2 sm:grid-cols-3">
         {recipes.map((recipe) => {

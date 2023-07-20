@@ -1,3 +1,4 @@
+import { FoodAnalyzeResult } from '~/types/spoonacular/food-analyze';
 import { RecipeInformation } from '~/types/spoonacular/recipe-information';
 import { RecipeSearchResult } from '~/types/spoonacular/recipe-search';
 
@@ -133,6 +134,26 @@ class SpoonacularAPI {
 
     const data = await response.json();
     return data.results;
+  }
+
+  // Food Image Analysis by File
+  // https://spoonacular.com/food-api/docs#Image-Analysis-File
+  async AnalyzeFoodImageByFile(file: File): Promise<FoodAnalyzeResult> {
+    const endpoint = this.buildEndpoint('/food/images/analyze');
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch food image analysis by file');
+    }
+
+    return response.json();
   }
 }
 
