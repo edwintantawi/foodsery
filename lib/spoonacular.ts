@@ -30,7 +30,7 @@ class SpoonacularAPI {
     });
 
     if (!response.ok) {
-      throw new Error();
+      throw new Error('Failed to fetch random daily recipes');
     }
 
     const data = await response.json();
@@ -52,7 +52,7 @@ class SpoonacularAPI {
     });
 
     if (!response.ok) {
-      throw new Error();
+      throw new Error('Failed to fetch random vegetarian recipes');
     }
 
     const data = await response.json();
@@ -72,7 +72,7 @@ class SpoonacularAPI {
     });
 
     if (!response.ok) {
-      throw new Error();
+      throw new Error('Failed to fetch random dessert recipes');
     }
 
     const data = await response.json();
@@ -89,7 +89,7 @@ class SpoonacularAPI {
     });
 
     if (!response.ok) {
-      throw new Error();
+      throw new Error('Failed to fetch random food trivia');
     }
 
     const data = await response.json();
@@ -109,7 +109,7 @@ class SpoonacularAPI {
 
     if (!response.ok) {
       if (response.status === 404) return null;
-      throw new Error();
+      throw new Error(`Failed to fetch recipe information with id "${id}"`);
     }
 
     const data = await response.json();
@@ -128,7 +128,7 @@ class SpoonacularAPI {
     });
 
     if (!response.ok) {
-      throw new Error();
+      throw new Error('Failed to fetch recipes by query');
     }
 
     const data = await response.json();
