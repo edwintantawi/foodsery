@@ -67,6 +67,7 @@ export function SearchBar() {
         />
         <Input
           ref={inputRef}
+          disabled={isPending}
           className={cn('truncate px-11', {
             'pr-14': isEmptyQuery,
           })}
