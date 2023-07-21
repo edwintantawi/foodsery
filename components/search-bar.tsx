@@ -15,6 +15,8 @@ export function SearchBar() {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [query, setQuery] = React.useState(searchParams.get('q') ?? '');
 
+  const [isPending, startTransition] = React.useTransition();
+
   const isEmptyQuery = query === '';
 
   React.useEffect(() => {
@@ -50,7 +52,10 @@ export function SearchBar() {
     if (!query) return;
 
     inputRef.current?.blur();
-    router.push(`/search?q=${query}`);
+
+    startTransition(() => {
+      router.push(`/search?q=${query}`);
+    });
   };
 
   return (
@@ -74,6 +79,14 @@ export function SearchBar() {
           <kbd className="pointer-events-none absolute bottom-1/2 right-2 flex h-7 translate-y-1/2 select-none items-center gap-1 rounded border bg-muted px-2 font-mono text-[10px] font-medium">
             <span className="text-xs">⌘</span>K
           </kbd>
+        ) : isPending ? (
+          <div
+            className={
+              'absolute bottom-1/2 right-1.5 grid h-7 w-7 translate-y-1/2 place-items-center text-muted-foreground'
+            }
+          >
+            <Icons.Loader size={20} className="animate-spin" />
+          </div>
         ) : (
           <Button
             type="reset"
