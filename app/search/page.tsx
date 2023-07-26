@@ -28,11 +28,18 @@ export async function generateMetadata({
       return {
         title: constant.notFound.title,
         description: constant.notFound.description,
+        openGraph: {
+          title: constant.notFound.title,
+          description: constant.notFound.description,
+        },
       };
     }
 
     return {
       title: `Search results for ${searchParams.q}`,
+      openGraph: {
+        title: `Search results for ${searchParams.q}`,
+      },
     };
   } catch (error) {
     return {};
