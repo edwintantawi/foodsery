@@ -3,6 +3,8 @@
 import * as React from 'react';
 import Link from 'next/link';
 
+import { Balancer } from 'react-wrap-balancer';
+
 import { analyzeFoodImageAction } from '~/app/analyze/actions';
 import { Header } from '~/components/header';
 import { Icons } from '~/components/icons';
@@ -184,7 +186,7 @@ export default function AnalyzePage() {
           <AlertDialogContent>
             <AlertDialogHeader>
               <AlertDialogTitle>
-                Failed to Access Device Camera!
+                <Balancer>Failed to Access Device Camera!</Balancer>
               </AlertDialogTitle>
               <AlertDialogDescription>
                 Please make sure you have granted access to your device camera

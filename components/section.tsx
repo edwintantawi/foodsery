@@ -14,11 +14,9 @@ export function Section({ children, icon, title, subtitle }: SectionProps) {
         <div className="flex aspect-square w-10 shrink-0 items-center justify-center rounded-lg border bg-slate-100 text-primary">
           {icon}
         </div>
-        <div className="sm:-mt-1">
-          <h2 className="font-bold sm:text-lg">{title}</h2>
-          <p className="text-xs text-muted-foreground sm:-mt-1 sm:text-sm">
-            {subtitle}
-          </p>
+        <div>
+          <h2 className="font-bold">{title}</h2>
+          <p className="text-xs text-muted-foreground">{subtitle}</p>
         </div>
       </header>
       {children}

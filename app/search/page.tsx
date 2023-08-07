@@ -1,10 +1,15 @@
 import * as React from 'react';
 import { Metadata } from 'next';
-import { notFound, redirect } from 'next/navigation';
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
+
+import { Balancer } from 'react-wrap-balancer';
 
 import { constant } from '~/app/search/constant';
 import { Header } from '~/components/header';
+import { Icons } from '~/components/icons';
 import { RecipeCard } from '~/components/recipe-card';
+import { Button } from '~/components/ui/button';
 import { spoonacular } from '~/lib/spoonacular';
 import { getRecipeImageById } from '~/lib/utils';
 
@@ -24,11 +29,18 @@ export async function generateMetadata({
       return {
         title: constant.notFound.title,
         description: constant.notFound.description,
+        openGraph: {
+          title: constant.notFound.title,
+          description: constant.notFound.description,
+        },
       };
     }
 
     return {
       title: `Search results for ${searchParams.q}`,
+      openGraph: {
+        title: `Search results for ${searchParams.q}`,
+      },
     };
   } catch (error) {
     return {};
@@ -40,7 +52,29 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
   const recipes = await spoonacular.searchRecipesByQuery(searchParams.q);
 
-  if (recipes.length === 0) return notFound();
+  // related to this issue https://github.com/edwintantawi/foodsery/issues/5
+  // if the search result is empty, we will show a not found page here
+  // instead of using not-found.tsx page
+  if (recipes.length === 0) {
+    return (
+      <main className="container flex flex-1 items-center py-4">
+        <div className="flex w-full flex-col items-center rounded-lg border p-6 text-center">
+          <Icons.NotFound size={50} className="mb-2" />
+
+          <h1 className="mb-1 text-xl font-bold">{constant.notFound.title}</h1>
+          <p className="mb-4 text-sm text-muted-foreground">
+            <Balancer>{constant.notFound.description}</Balancer>
+          </p>
+
+          <Button asChild className="w-full gap-2">
+            <Link href="/">
+              <Icons.Back size={20} /> Back To Home
+            </Link>
+          </Button>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="container flex-1">
