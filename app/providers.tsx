@@ -2,6 +2,8 @@
 
 import * as React from 'react';
 
+import { Provider as ReactWrapBalancerProvider } from 'react-wrap-balancer';
+
 import { TooltipProvider } from '~/components/ui/tooltip';
 
 interface ProvidersProps {
@@ -9,5 +11,9 @@ interface ProvidersProps {
 }
 
 export function Providers({ children }: ProvidersProps) {
-  return <TooltipProvider>{children}</TooltipProvider>;
+  return (
+    <TooltipProvider>
+      <ReactWrapBalancerProvider>{children}</ReactWrapBalancerProvider>
+    </TooltipProvider>
+  );
 }
