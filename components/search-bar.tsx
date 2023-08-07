@@ -15,6 +15,8 @@ export function SearchBar() {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [query, setQuery] = React.useState(searchParams.get('q') ?? '');
 
+  const [isPending, startTransition] = React.useTransition();
+
   const isEmptyQuery = query === '';
 
   React.useEffect(() => {
@@ -50,7 +52,10 @@ export function SearchBar() {
     if (!query) return;
 
     inputRef.current?.blur();
-    router.push(`/search?q=${query}`);
+
+    startTransition(() => {
+      router.push(`/search?q=${query}`);
+    });
   };
 
   return (
@@ -62,6 +67,7 @@ export function SearchBar() {
         />
         <Input
           ref={inputRef}
+          disabled={isPending}
           className={cn('truncate px-11', {
             'pr-14': isEmptyQuery,
           })}
@@ -70,21 +76,28 @@ export function SearchBar() {
           onChange={handleChangeQuery}
         />
 
-        {isEmptyQuery ? (
-          <kbd className="pointer-events-none absolute bottom-1/2 right-2 flex h-7 translate-y-1/2 select-none items-center gap-1 rounded border bg-muted px-2 font-mono text-[10px] font-medium">
-            <span className="text-xs">⌘</span>K
-          </kbd>
-        ) : (
-          <Button
-            type="reset"
-            variant="secondary"
-            className="absolute bottom-1/2 right-1.5 h-7 w-7 translate-y-1/2 border p-1"
-            onClick={handleClearSearch}
-          >
-            <Icons.Cancel size={16} />
-            <span className="sr-only">Clear search</span>
-          </Button>
-        )}
+        <div className="absolute bottom-1/2 right-1.5 grid translate-y-1/2 place-items-center">
+          {isEmptyQuery ? (
+            <kbd className="pointer-events-none flex h-7 select-none items-center gap-1 rounded border bg-muted px-2 font-mono text-[10px] font-medium">
+              <span className="text-xs">⌘</span>K
+            </kbd>
+          ) : isPending ? (
+            <Icons.Loader
+              size={20}
+              className="mr-1 animate-spin text-muted-foreground"
+            />
+          ) : (
+            <Button
+              type="reset"
+              variant="secondary"
+              className="h-7 w-7 border p-1"
+              onClick={handleClearSearch}
+            >
+              <Icons.Cancel size={16} />
+              <span className="sr-only">Clear search</span>
+            </Button>
+          )}
+        </div>
       </div>
     </form>
   );
